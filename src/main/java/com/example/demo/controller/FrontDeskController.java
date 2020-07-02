@@ -36,7 +36,12 @@ public class FrontDeskController {
 	public List<Reminder> getReminders() {
 		return reminderService.getReminders();
 	}
-
+	
+	@PostMapping("/reminder")
+	public Reminder addReminder(@RequestBody Reminder reminder) {
+		reminderService.addReminder(reminder);
+			return reminder;
+	}
 	@GetMapping("/recentlyVisited")
 	public List<RecentlyVisited> getRecentlyVisitedData() {
 		return recentlyVisitedService.getRecentlyVisitedData();

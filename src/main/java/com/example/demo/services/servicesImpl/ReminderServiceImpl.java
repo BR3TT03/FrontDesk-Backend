@@ -24,6 +24,14 @@ public class ReminderServiceImpl implements ReminderService {
 		ReminderRepository reminderRepository = databaseService.getDaoClass(ReminderRepository.class);
 		return reminderRepository.getReminders();
 	}
+
+	@Override
+	public void addReminder(Reminder reminder) {
+		// TODO Auto-generated method stub
+		ReminderRepository reminderRepository = databaseService.getDaoClass(ReminderRepository.class);
+		reminderRepository.addReminder(reminder);
+		
+	}
 	
 	
 	
