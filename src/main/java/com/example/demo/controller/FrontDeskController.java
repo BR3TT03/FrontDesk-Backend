@@ -15,7 +15,7 @@ import com.example.demo.model.Reminder;
 import com.example.demo.services.ClientInfoService;
 import com.example.demo.services.RecentlyVisitedService;
 import com.example.demo.services.ReminderService;
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class FrontDeskController {
 
