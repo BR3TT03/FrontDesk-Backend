@@ -3,7 +3,7 @@ package com.example.demo.model;
 import java.sql.Date;
 
 public class Reminder {
-	int id;
+	private int id;
 	private String task;
 	private Date date;
 	private String status;
