@@ -24,7 +24,7 @@ public class JdbiConfig {
 		HikariConfig hikariConfig = new HikariConfig();
 		hikariConfig.setUsername("root");
 		hikariConfig.setPassword("");
-		hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/test?autoReconnect=true&serverTimezone=UTC");
+		hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/FrontDesk?autoReconnect=true&serverTimezone=UTC");
 		hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		return new HikariDataSource(hikariConfig);
 	}

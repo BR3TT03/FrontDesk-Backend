@@ -8,23 +8,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.TestModel;
-import com.example.demo.services.TestDataService;
+import com.example.demo.model.RecentlyVisited;
+import com.example.demo.model.Reminder;
+import com.example.demo.services.RecentlyVisitedService;
+import com.example.demo.services.ReminderService;
 
 @RestController
 public class FrontDeskController {
 
 	@Autowired
-	TestDataService testDataService;
+	ReminderService reminderService;
 
-	@GetMapping
-	public List<TestModel> getTestData() throws NullPointerException {
-		return testDataService.getTestData();
+	@Autowired
+	RecentlyVisitedService recentlyVisitedService;
+
+	@GetMapping("/reminder")
+	public List<Reminder> getReminders() {
+		return reminderService.getReminders();
 	}
 
-	@PostMapping
-	public TestModel postTestData(@RequestBody TestModel testModel) {
-		testDataService.postTestData(testModel);
-		return testModel;
+	@GetMapping("/recentlyVisited")
+	public List<RecentlyVisited> getRecentlyVisitedData() {
+		return recentlyVisitedService.getRecentlyVisitedData();
+	}
+
+	@PostMapping("/recentlyVisited")
+	public RecentlyVisited postRecentlyVisitedData(@RequestBody RecentlyVisited recentlyVisited) {
+		recentlyVisitedService.postRecenltyVisitedData(recentlyVisited);
+		return recentlyVisited;
 	}
 }
