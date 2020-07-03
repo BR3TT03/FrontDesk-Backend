@@ -34,7 +34,7 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 	}
 
 	@Override
-	public int getTotalPages() {
+	public double getTotalPages() {
 		// TODO Auto-generated method stub
 		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
 		return clientInfoRepository.getTotalPages();
