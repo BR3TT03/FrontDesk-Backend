@@ -33,4 +33,11 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 		clientInfoRepository.insertClientInfo(clientInfo);
 	}
 
+	@Override
+	public int getTotalPages() {
+		// TODO Auto-generated method stub
+		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
+		return clientInfoRepository.getTotalPages();
+	}
+
 }

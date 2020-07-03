@@ -13,10 +13,13 @@ import com.example.demo.model.ClientInfo;
 
 @Repository
 public interface ClientInfoRepository {
-	@SqlQuery("SELECT * FROM ClientInfo WHERE id>:id LIMIT 5")
+	@SqlQuery("SELECT * FROM ClientInfo LIMIT 10,:page")
 	@RegisterBeanMapper(ClientInfo.class)
-	public List<ClientInfo> getClientInfo(@Bind int id);
+	public List<ClientInfo> getClientInfo(@Bind int page);
 
 	@SqlUpdate("INSERT INTO ClientInfo (name,academic,status,email,phone,weight,address,age,date,remark,height,gender,maritalStatus) VALUES (:name,:academic,:status,:email,:phone,:weight,:address,:age,:date,:remark,:height,:gender,:maritalStatus)")
 	public void insertClientInfo(@BindBean ClientInfo clientInfo);
+	
+	@SqlQuery("SELECT COUNT(*) FROM ClientInfo")
+	public int getTotalPages();
 }

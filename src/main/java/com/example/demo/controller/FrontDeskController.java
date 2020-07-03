@@ -54,10 +54,15 @@ public class FrontDeskController {
 		return recentlyVisited;
 	}
 	
-	@GetMapping("/clientInfo/{id}")
-	public List<ClientInfo> getClientInfo(@PathVariable int id){
+	@GetMapping("/clientInfo/{page}")
+	public List<ClientInfo> getClientInfo(@PathVariable int page){
 //		int NoOfPages = clientInfoService.getClientInfo().size();
-		return clientInfoService.getClientInfo(id);
+		return clientInfoService.getClientInfo((page-1)*10);
+	}
+	@GetMapping("/totalPages")
+	public int getTotalPages() {
+		return clientInfoService.getTotalPages();
+		
 	}
 	
 	@PostMapping("/clientInfo")
