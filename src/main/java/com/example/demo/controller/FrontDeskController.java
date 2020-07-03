@@ -60,8 +60,10 @@ public class FrontDeskController {
 		return clientInfoService.getClientInfo((page-1)*10);
 	}
 	@GetMapping("/totalPages")
-	public int getTotalPages() {
-		return clientInfoService.getTotalPages();
+	public float getTotalPages() {	
+		float totalPage = clientInfoService.getTotalPages()/10;
+		Math.ceil(totalPage);
+		return totalPage;
 		
 	}
 	
