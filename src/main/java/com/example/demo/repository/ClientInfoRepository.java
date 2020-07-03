@@ -13,7 +13,7 @@ import com.example.demo.model.ClientInfo;
 
 @Repository
 public interface ClientInfoRepository {
-	@SqlQuery("SELECT * FROM ClientInfo LIMIT 10,:page")
+	@SqlQuery("SELECT * FROM ClientInfo LIMIT 10 OFFSET :page")
 	@RegisterBeanMapper(ClientInfo.class)
 	public List<ClientInfo> getClientInfo(@Bind int page);
 
