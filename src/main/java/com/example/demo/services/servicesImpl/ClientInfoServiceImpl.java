@@ -20,10 +20,10 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 	}
 
 	@Override
-	public List<ClientInfo> getClientInfo() {
+	public List<ClientInfo> getClientInfo(int id) {
 		// TODO Auto-generated method stub
 		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
-		return clientInfoRepository.getClientInfo();
+		return clientInfoRepository.getClientInfo(id);
 	}
 
 	@Override

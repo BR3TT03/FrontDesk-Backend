@@ -5,6 +5,6 @@ import java.util.List;
 import com.example.demo.model.ClientInfo;
 
 public interface ClientInfoService {
-	public List<ClientInfo> getClientInfo();
+	public List<ClientInfo> getClientInfo(int id);
 	public void insertClientInfo(ClientInfo clientInfo);
 }
