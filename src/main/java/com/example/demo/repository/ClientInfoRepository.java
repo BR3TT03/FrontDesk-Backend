@@ -21,5 +21,5 @@ public interface ClientInfoRepository {
 	public void insertClientInfo(@BindBean ClientInfo clientInfo);
 	
 	@SqlQuery("SELECT COUNT(*) FROM ClientInfo")
-	public double getTotalPages();
+	public float getTotalPages();
 }
