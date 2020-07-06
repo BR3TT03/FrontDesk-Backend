@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.ClientInfo;
@@ -54,10 +56,21 @@ public class FrontDeskController {
 		return recentlyVisited;
 	}
 	
-	@GetMapping("/clientInfo/{page}")
-	public List<ClientInfo> getClientInfo(@PathVariable int page){
+//	@GetMapping("/clientInfo/{page}")
+//	public List<ClientInfo> getClientInfo(@PathVariable int page){
+////		int NoOfPages = clientInfoService.getClientInfo().size();
+//		return clientInfoService.getClientInfo((page-1)*10);
+//	}
+	
+	@GetMapping("/clientInfo")
+	public List<ClientInfo> getClientInfo(
+			@RequestParam(name ="status") String status,
+			@RequestParam(name="orderBy") String orderBy,
+			@RequestParam(name="page") int page
+			)
+	{
 //		int NoOfPages = clientInfoService.getClientInfo().size();
-		return clientInfoService.getClientInfo((page-1)*10);
+		return clientInfoService.getClientInfoByFields((page-1)*10,status,orderBy);
 	}
 	@GetMapping("/totalPages")
 	public int getTotalPages() {
@@ -70,7 +83,7 @@ public class FrontDeskController {
 		return (totalPage/10);
 		
 	}
-	
+
 	@PostMapping("/clientInfo")
 	public ClientInfo insertClientInfo(@RequestBody ClientInfo clientInfo) {
 		clientInfoService.insertClientInfo(clientInfo);

@@ -1,5 +1,6 @@
 package com.example.demo.services.servicesImpl;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -20,10 +21,10 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 	}
 
 	@Override
-	public List<ClientInfo> getClientInfo(int id) {
+	public List<ClientInfo> getClientInfoByFields(int page,String status,String orderBy) {
 		// TODO Auto-generated method stub
 		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
-		return clientInfoRepository.getClientInfo(id);
+		return clientInfoRepository.getClientInfoByFields(page,status,orderBy);
 	}
 
 	@Override
