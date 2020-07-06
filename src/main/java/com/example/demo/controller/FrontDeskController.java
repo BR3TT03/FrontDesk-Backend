@@ -1,12 +1,12 @@
 package com.example.demo.controller;
 
-import java.sql.Date;
 import java.util.List;
 
+import org.hibernate.type.descriptor.sql.VarcharTypeDescriptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.OrderComparator;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +18,7 @@ import com.example.demo.model.Reminder;
 import com.example.demo.services.ClientInfoService;
 import com.example.demo.services.RecentlyVisitedService;
 import com.example.demo.services.ReminderService;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 @CrossOrigin(origins = "*")
 @RestController
 public class FrontDeskController {
@@ -63,12 +64,12 @@ public class FrontDeskController {
 //	}
 	
 	@GetMapping("/clientInfo")
-	public List<ClientInfo> getClientInfo(
+	public List<ClientInfo> getClientInfoByFields(
 			@RequestParam(name ="status") String status,
 			@RequestParam(name="orderBy") String orderBy,
 			@RequestParam(name="page") int page
 			)
-	{
+	{ 	
 //		int NoOfPages = clientInfoService.getClientInfo().size();
 		return clientInfoService.getClientInfoByFields((page-1)*10,status,orderBy);
 	}
