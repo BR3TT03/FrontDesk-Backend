@@ -1,4 +1,3 @@
-
 package com.example.demo.configs;
 
 
@@ -13,11 +12,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-/**
- * @author Ashish Bista <rockbrett03@gmail.com>
- *
- * Since 2019
- */
 @Configuration
 public class JdbiConfig {
 
@@ -28,20 +22,18 @@ public class JdbiConfig {
 	@Bean
 	public HikariDataSource hikariDatasource() {
 		HikariConfig hikariConfig = new HikariConfig();
-		//remote MySql
-		/*
-		 * hikariConfig.setUsername("2JexZAJXeG");
-		 * hikariConfig.setPassword("hdojRSzwXD"); hikariConfig.setJdbcUrl(
-		 * "jdbc:mysql://remotemysql.com:3306/2JexZAJXeG?autoReconnect=true&serverTimezone=UTC"
-		 * );
-		 */
+		//remote my sql
 		
+		 hikariConfig.setUsername("2JexZAJXeG");
+		 hikariConfig.setPassword("hdojRSzwXD"); 
+		 hikariConfig.setJdbcUrl("jdbc:mysql://remotemysql.com:3306/2JexZAJXeG?autoReconnect=true&serverTimezone=UTC");
+		 return new HikariDataSource(hikariConfig);
 		//LocalHost
-		hikariConfig.setUsername("root");
-		hikariConfig.setPassword("");
-		hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/FrontDesk?autoReconnect=true&serverTimezone=UTC");
-		hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		return new HikariDataSource(hikariConfig);
+//		hikariConfig.setUsername("root");
+//		hikariConfig.setPassword("");
+//		hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/FrontDesk?autoReconnect=true&serverTimezone=UTC");
+//		hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
+//		return new HikariDataSource(hikariConfig);
 	}
 	
 	
