@@ -32,13 +32,13 @@ public class ClientInfoController {
 	 */
 	
 	@GetMapping("/clientInfo")
-	public List<ClientInfo> getClientInfoByFields(
+	public List<ClientInfo> getClientInfoByStatus(
 			@RequestParam(name ="status", required=false) String status,
 			@RequestParam(name="order" , required=false, defaultValue="DESC") String order,
 			@RequestParam(name="page") int page
 			)
 	{ 	
-		return clientInfoService.getClientInfoByFields((page-1)*10,status,order);
+		return clientInfoService.getClientInfoByStatus((page-1)*10,status,order);
 	}
 	
 	@GetMapping("/totalPages")
