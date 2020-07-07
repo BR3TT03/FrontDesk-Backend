@@ -27,7 +27,7 @@ public class JdbiConfig {
 		 hikariConfig.setUsername("2JexZAJXeG");
 		 hikariConfig.setPassword("hdojRSzwXD"); 
 		 hikariConfig.setJdbcUrl("jdbc:mysql://remotemysql.com:3306/2JexZAJXeG?autoReconnect=true&serverTimezone=UTC");
-		 return new HikariDataSource(hikariConfig);
+		 return new HikariDataSource(hikariConfig); 
 		//LocalHost
 //		hikariConfig.setUsername("root");
 //		hikariConfig.setPassword("");

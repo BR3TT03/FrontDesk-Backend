@@ -64,12 +64,17 @@ public class ClientInfoController {
 	}
 
 	@DeleteMapping("/deleteClientInfo/{id}")
-	public String deleteClientInfoById(@PathVariable("id") int id) {
-		if(clientInfoService.existsById(id) == 1) {
-		clientInfoService.deleteClientInfoById(id);
-		return "Successfully Deleted!";
+	public String deleteClientInfoById(@PathVariable List<Integer> id) {
+		for (int clientId : id) {
+			if (clientInfoService.existsById(clientId) == 1) 
+			{
+				clientInfoService.deleteClientInfoById(clientId);
+			}
+			else {
+				return "Client Id " + clientId + " does not exists!";
+			}
 		}
-			return "Client Id " + id + " does not exists!";		
+		return "Successfully deleted!";
 	}
 
 	@PatchMapping("/updateClientInfo/{id}")
@@ -88,11 +93,11 @@ public class ClientInfoController {
 				// set given field for defined object to value V
 			});
 
-			 clientInfoService.updateClientInfo(existingData, id);
-			 return "Successfully updated";
+			clientInfoService.updateClientInfo(existingData, id);
+			return "Successfully updated";
 //		    claimService.saveOrUpdate(claim);
 		}
-		return "Client with clientId "+id+" does not exist" ;
+		return "Client with clientId " + id + " does not exist";
 
 	}
 }
