@@ -22,9 +22,9 @@ public class JdbiConfig {
 	@Bean
 	public HikariDataSource hikariDatasource() {
 		HikariConfig hikariConfig = new HikariConfig();
-		hikariConfig.setUsername("2JexZAJXeG");
-		hikariConfig.setPassword("hdojRSzwXD");
-		hikariConfig.setJdbcUrl("jdbc:mysql://remotemysql.com:3306/2JexZAJXeG?autoReconnect=true&serverTimezone=UTC");
+		hikariConfig.setUsername("root");
+		hikariConfig.setPassword("");
+		hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/FrontDesk?autoReconnect=true&serverTimezone=UTC");
 		hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		return new HikariDataSource(hikariConfig);
 	}

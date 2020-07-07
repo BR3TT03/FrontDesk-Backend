@@ -9,17 +9,28 @@ import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
-import org.springframework.core.OrderComparator;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.ClientInfo;
-import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 
 @Repository
 public interface ClientInfoRepository {
+	
+	@SqlQuery("SELECT * FROM ClientInfo ORDER BY createdAt DESC LIMIT 10 OFFSET :page")
+	@RegisterBeanMapper(ClientInfo.class)
+	public List<ClientInfo> getClientInfoDESC(@Bind int page);
+	
+	@SqlQuery("SELECT * FROM ClientInfo ORDER BY createdAt ASC LIMIT 10 OFFSET :page")
+	@RegisterBeanMapper(ClientInfo.class)
+	public List<ClientInfo> getClientInfoASC(@Bind int page);
+	
 	@SqlQuery("SELECT * FROM ClientInfo WHERE status = :status ORDER BY createdAt DESC LIMIT 10 OFFSET :page")
 	@RegisterBeanMapper(ClientInfo.class)
-	public List<ClientInfo> getClientInfoByFields(@Bind int page,String status,String orderBy);
+	public List<ClientInfo> getClientInfoByFieldsDESC(@Bind int page,String status,String orderBy);
+	
+	@SqlQuery("SELECT * FROM ClientInfo WHERE status = :status ORDER BY createdAt ASC LIMIT 10 OFFSET :page")
+	@RegisterBeanMapper(ClientInfo.class)
+	public List<ClientInfo> getClientInfoByFieldsASC(@Bind int page,String status,String orderBy);
 
 	@SqlUpdate("INSERT INTO ClientInfo (name,academic,status,email,phone,weight,address,age,date,remark,height,gender,"
 			+ "maritalStatus) VALUES (:name,:academic,:status,:email,:phone,:weight,:address,:age,:date,:remark,:height,"
