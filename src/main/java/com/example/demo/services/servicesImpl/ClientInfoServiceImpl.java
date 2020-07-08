@@ -33,7 +33,7 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 	 * clientInfoRepository.getClientInfoDESc(page); // }
 	 */
 	@Override
-	public List<ClientInfo> getClientInfoByStatus(int page, String status, String order) {
+	public List<ClientInfo> getClientInfoByStatus(int page, String status, String order,String nameFilter) {
 //		System.out.println("page:"+page+" status "+status+" order "+order);
 		// TODO Auto-generated method stub
 		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
@@ -51,7 +51,7 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 
 		else if ((order.equalsIgnoreCase("DESC") && status != null) || (order == null && status != null)) {
 //			System.out.println("desc");
-			return clientInfoRepository.getClientInfoByStatusDESC(page, status, order);
+			return clientInfoRepository.getClientInfoByStatusDESC(page, status, order,nameFilter);
 		}
 //		System.out.println("hey end");
 		return null;

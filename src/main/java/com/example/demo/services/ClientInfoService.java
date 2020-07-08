@@ -12,7 +12,7 @@ import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 
 public interface ClientInfoService {
 //	public List<ClientInfo> getClientInfo(int page);
-	public List<ClientInfo> getClientInfoByStatus(int page,String status,String order);
+	public List<ClientInfo> getClientInfoByStatus(int page,String status,String order,String nameFilter);
 	public void insertClientInfo(ClientInfo clientInfo);
 	public int getTotalPages();
 	public boolean deleteClientInfoById(int id);

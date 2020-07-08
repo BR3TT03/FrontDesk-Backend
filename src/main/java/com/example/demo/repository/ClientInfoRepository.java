@@ -31,9 +31,9 @@ public interface ClientInfoRepository {
 	@RegisterBeanMapper(ClientInfo.class)
 	public List<ClientInfo> getClientInfoASC(@Bind int page);	
 	
-	@SqlQuery("SELECT * FROM ClientInfo WHERE status = :status ORDER BY createdAt DESC LIMIT 10 OFFSET :page")
+	@SqlQuery("SELECT * FROM ClientInfo WHERE status = :status AND name LIKE '%' ORDER BY createdAt DESC LIMIT 10 OFFSET :page")
 	@RegisterBeanMapper(ClientInfo.class)
-	public List<ClientInfo> getClientInfoByStatusDESC(@Bind int page,String status,String orderBy);
+	public List<ClientInfo> getClientInfoByStatusDESC(@Bind int page,String status,String orderBy,String nameFilter);
 	
 	@SqlQuery("SELECT * FROM ClientInfo WHERE status = :status ORDER BY createdAt ASC LIMIT 10 OFFSET :page")
 	@RegisterBeanMapper(ClientInfo.class)

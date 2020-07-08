@@ -53,8 +53,9 @@ public class ClientInfoController {
 	@GetMapping("/clientInfo")
 	public List<ClientInfo> getClientInfoByStatus(@RequestParam(name = "status", required = false) String status,
 			@RequestParam(name = "order", required = false, defaultValue = "DESC") String order,
-			@RequestParam(name = "page") int page) {
-		return clientInfoService.getClientInfoByStatus((page - 1) * 10, status, order);
+			@RequestParam(name = "page") int page,
+			@RequestParam(name = "nameFilter", required = false) String nameFilter) {
+		return clientInfoService.getClientInfoByStatus((page - 1) * 10, status, order, nameFilter);
 	}
 
 	@PostMapping("/clientInfo")
@@ -66,11 +67,9 @@ public class ClientInfoController {
 	@DeleteMapping("/deleteClientInfo/{id}")
 	public String deleteClientInfoById(@PathVariable List<Integer> id) {
 		for (int clientId : id) {
-			if (clientInfoService.existsById(clientId) == 1) 
-			{
+			if (clientInfoService.existsById(clientId) == 1) {
 				clientInfoService.deleteClientInfoById(clientId);
-			}
-			else {
+			} else {
 				return "Client Id " + clientId + " does not exists!";
 			}
 		}
@@ -83,6 +82,7 @@ public class ClientInfoController {
 		if (clientInfoService.existsById(id) == 1) {
 			System.out.println("before null pointer exception");
 			ClientInfo existingData = clientInfoService.getClientInfoById(id);
+			System.out.println("After null pointer exception");
 			clientInfo.forEach((k, v) -> {
 				// use reflection to get field k on object and set it to value v
 				// Change Claim.class to whatver your object is: Object.class
