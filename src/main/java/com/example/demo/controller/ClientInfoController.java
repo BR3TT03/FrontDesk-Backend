@@ -61,7 +61,7 @@ public class ClientInfoController {
 	@PostMapping("/clientInfo")
 	public ClientInfo insertClientInfo(@RequestBody ClientInfo clientInfo) {
 		clientInfoService.insertClientInfo(clientInfo);
-		return clientInfo;
+		return clientInfo;	
 	}
 
 	@DeleteMapping("/deleteClientInfo/{id}")
@@ -87,7 +87,7 @@ public class ClientInfoController {
 				// use reflection to get field k on object and set it to value v
 				// Change Claim.class to whatver your object is: Object.class
 				Field field = ReflectionUtils.findField(ClientInfo.class, (String) k);
-				System.out.println(field);// find field in the object class
+//				System.out.println(field);// find field in the object class
 				field.setAccessible(true);
 				ReflectionUtils.setField(field, existingData, v);
 				// set given field for defined object to value V

@@ -3,6 +3,10 @@ package com.example.demo.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import org.checkerframework.checker.formatter.qual.Format;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ClientInfo {
 	private int id;
 	private String name;
@@ -13,14 +17,14 @@ public class ClientInfo {
 	private int weight;
 	private String address;
 	private int age;
-	private Date date;
+	private String date;
 	private String remark;
 	private Float height;
 	private String gender;
 	private String maritalStatus;
 	private Timestamp createdAt;
 	public ClientInfo(int id, String name, String academic, String status, String email, String phone, int weight,
-			String address, int age, Date date, String remark, Float height, String gender, String maritalStatus,
+			String address, int age, String date, String remark, Float height, String gender, String maritalStatus,
 			Timestamp createdAt) {
 		super();
 		this.id = id;
@@ -97,10 +101,10 @@ public class ClientInfo {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public String getRemark() {
