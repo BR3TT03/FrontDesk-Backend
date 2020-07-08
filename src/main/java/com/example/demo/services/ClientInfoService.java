@@ -24,4 +24,9 @@ public interface ClientInfoService {
 	public boolean updateClientInfo(ClientInfo existingData, int id);
 	public int existsById(int id);
 	public ClientInfo getClientInfoById(int id);
+	/**
+	 * @param status
+	 * @return
+	 */
+	public int getTotalPagesByStatus(String status);
 }

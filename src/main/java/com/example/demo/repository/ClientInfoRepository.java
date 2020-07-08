@@ -59,4 +59,11 @@ public interface ClientInfoRepository {
 			+ "age=:age,date=:date,remark=:remark,height=:height,gender=:gender,maritalStatus=:maritalStatus,createdAt=CURRENT_DATE WHERE id=:id")
 	@RegisterBeanMapper(ClientInfo.class)
 	public boolean updateClientInfo(@BindBean ClientInfo clientInfo, @Bind int id);
+
+	/**
+	 * @param status
+	 * @return
+	 */
+	@SqlQuery("SELECT COUNT(*) FROM ClientInfo where status=:status")
+	public int getTotalPagesByStatus(@Bind String status);
 }

@@ -38,9 +38,20 @@ public class ClientInfoController {
 	 * clientInfoService.getClientInfo((page-1)*10); }
 	 */
 
-	@GetMapping("/totalPages")
+	@GetMapping("clientInfo/totalPages")
 	public int getTotalPages() {
 		int totalPage = clientInfoService.getTotalPages();
+		if (totalPage % 10 != 0) {
+			totalPage = (int) (totalPage / 10) + 1;
+			return totalPage;
+		}
+
+		return (totalPage / 10);
+
+	}
+	@GetMapping("/statusTotalPages/{status}")
+	public int getTotalPagesByStatus(@PathVariable("status") String status) {
+		int totalPage = clientInfoService.getTotalPagesByStatus(status);
 		if (totalPage % 10 != 0) {
 			totalPage = (int) (totalPage / 10) + 1;
 			return totalPage;

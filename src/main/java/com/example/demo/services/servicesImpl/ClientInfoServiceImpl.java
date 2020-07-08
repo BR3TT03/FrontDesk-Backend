@@ -113,4 +113,11 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 		}
 
 	}
+
+	@Override
+	public int getTotalPagesByStatus(String status) {
+		// TODO Auto-generated method stub
+		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
+		return clientInfoRepository.getTotalPagesByStatus(status);
+	}
 }
