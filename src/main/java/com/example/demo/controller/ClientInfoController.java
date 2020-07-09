@@ -38,9 +38,22 @@ public class ClientInfoController {
 	 * clientInfoService.getClientInfo((page-1)*10); }
 	 */
 
-	@GetMapping("clientInfo/totalPages")
-	public int getTotalPages() {
-		int totalPage = clientInfoService.getTotalPages();
+//	@GetMapping("clientInfo/totalPages")
+//	public int getTotalPages() {
+//		int totalPage = clientInfoService.getTotalPages();
+//		if (totalPage % 10 != 0) {
+//			totalPage = (int) (totalPage / 10) + 1;
+//			return totalPage;
+//		}
+//
+//		return (totalPage / 10);
+//
+//	}
+
+	@GetMapping("/totalPages")
+	public int getTotalPagesByStatus(@RequestParam(name = "status") String status) {
+		int totalPage = 1;
+		totalPage = clientInfoService.getTotalPagesByStatus(status);
 		if (totalPage % 10 != 0) {
 			totalPage = (int) (totalPage / 10) + 1;
 			return totalPage;
@@ -49,17 +62,18 @@ public class ClientInfoController {
 		return (totalPage / 10);
 
 	}
-	@GetMapping("/statusTotalPages/{status}")
-	public int getTotalPagesByStatus(@PathVariable("status") String status) {
-		int totalPage = clientInfoService.getTotalPagesByStatus(status);
-		if (totalPage % 10 != 0) {
-			totalPage = (int) (totalPage / 10) + 1;
-			return totalPage;
-		}
 
-		return (totalPage / 10);
-
-	}
+//	@GetMapping("/clientInfoByField")
+//	public List<ClientInfo> getClientInfoByField(@RequestParam Map<Object,Object> field){
+//		String[] columnName= {"null"};	
+//		String[] value= {"null"};
+//		field.forEach((k, v) -> {
+//			columnName[0]=(String)k;
+//			value[0] = (String)v;
+//		});
+//		
+//		return clientInfoService.getClientInfoByField(columnName[0],value[0]);
+//	}
 
 	@GetMapping("/clientInfo")
 	public List<ClientInfo> getClientInfoByStatus(@RequestParam(name = "status", required = false) String status,
@@ -69,10 +83,10 @@ public class ClientInfoController {
 		return clientInfoService.getClientInfoByStatus((page - 1) * 10, status, order, nameFilter);
 	}
 
-	@PostMapping("/clientInfo")
+	@PostMapping("/insertClientInfo")
 	public ClientInfo insertClientInfo(@RequestBody ClientInfo clientInfo) {
 		clientInfoService.insertClientInfo(clientInfo);
-		return clientInfo;	
+		return clientInfo;
 	}
 
 	@DeleteMapping("/deleteClientInfo/{id}")
@@ -98,7 +112,8 @@ public class ClientInfoController {
 				// use reflection to get field k on object and set it to value v
 				// Change Claim.class to whatver your object is: Object.class
 				Field field = ReflectionUtils.findField(ClientInfo.class, (String) k);
-//				System.out.println(field);// find field in the object class
+				System.out.println("#######Field: " + field.getName() + "############# " + k);// find field in the
+																								// object class
 				field.setAccessible(true);
 				ReflectionUtils.setField(field, existingData, v);
 				// set given field for defined object to value V

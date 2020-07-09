@@ -14,7 +14,7 @@ public interface ClientInfoService {
 //	public List<ClientInfo> getClientInfo(int page);
 	public List<ClientInfo> getClientInfoByStatus(int page,String status,String order,String nameFilter);
 	public void insertClientInfo(ClientInfo clientInfo);
-	public int getTotalPages();
+//	public int getTotalPages();
 	public boolean deleteClientInfoById(int id);
 	/**
 	 * @param existingData
@@ -29,4 +29,10 @@ public interface ClientInfoService {
 	 * @return
 	 */
 	public int getTotalPagesByStatus(String status);
+	/**
+	 * @param columnName
+	 * @param value
+	 * @return
+	 */
+	public List<ClientInfo> getClientInfoByField(String key, String value);
 }

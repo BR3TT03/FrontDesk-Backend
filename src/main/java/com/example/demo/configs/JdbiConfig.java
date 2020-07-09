@@ -22,12 +22,13 @@ public class JdbiConfig {
 	@Bean
 	public HikariDataSource hikariDatasource() {
 		HikariConfig hikariConfig = new HikariConfig();
-		//remote my sql
 		
+		//RemoteMySql
 		 hikariConfig.setUsername("2JexZAJXeG");
 		 hikariConfig.setPassword("hdojRSzwXD"); 
 		 hikariConfig.setJdbcUrl("jdbc:mysql://remotemysql.com:3306/2JexZAJXeG?autoReconnect=true&serverTimezone=UTC");
 		 return new HikariDataSource(hikariConfig); 
+		
 		//LocalHost
 //		hikariConfig.setUsername("root");
 //		hikariConfig.setPassword("");

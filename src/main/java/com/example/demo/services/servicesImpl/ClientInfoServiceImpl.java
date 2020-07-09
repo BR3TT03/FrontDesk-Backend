@@ -20,10 +20,12 @@ import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 public class ClientInfoServiceImpl implements ClientInfoService {
 
 	DatabaseService databaseService;
+	ClientInfoRepository clientInfoRepository;
 
 	public ClientInfoServiceImpl(DatabaseService databaseService) {
 		super();
 		this.databaseService = databaseService;
+		this.clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
 	}
 
 	/*
@@ -36,7 +38,7 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 	public List<ClientInfo> getClientInfoByStatus(int page, String status, String order,String nameFilter) {
 //		System.out.println("page:"+page+" status "+status+" order "+order);
 		// TODO Auto-generated method stub
-		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
+//		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
 
 		if (status == null && order.equalsIgnoreCase("ASC")) {
 //			System.out.println("in asc");
@@ -60,21 +62,21 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 	@Override
 	public void insertClientInfo(ClientInfo clientInfo) {
 		// TODO Auto-generated method stub
-		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
+//		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
 		clientInfoRepository.insertClientInfo(clientInfo);
 	}
 
-	@Override
-	public int getTotalPages() {
-		// TODO Auto-generated method stub
-		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
-		return clientInfoRepository.getTotalPages();
-	}
+//	@Override
+//	public int getTotalPages() {
+//		// TODO Auto-generated method stub
+//		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
+//		return clientInfoRepository.getTotalPages();
+//	}
 
 	@Override
 	public boolean deleteClientInfoById(int id) {
 		// TODO Auto-generated method stub
-		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
+//		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
 		return clientInfoRepository.deleteClientInfoById(id);
 
 	}
@@ -82,14 +84,14 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 	@Override
 	public boolean updateClientInfo(ClientInfo clientInfo, int id) {
 		// TODO Auto-generated method stub
-		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
+//		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
 		return clientInfoRepository.updateClientInfo(clientInfo, id);
 
 	}
 
 	@Override
 	public int existsById(int id) {
-		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
+//		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
 		try {
 			return clientInfoRepository.existsById(id);
 		} catch (Exception e) {
@@ -102,7 +104,7 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 	@Override
 	public ClientInfo getClientInfoById(int id) {
 		// TODO Auto-generated method stub
-		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
+//		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
 		try {
 			ClientInfo existing = clientInfoRepository.getClientInfoById(id);
 			return existing;
@@ -117,7 +119,20 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 	@Override
 	public int getTotalPagesByStatus(String status) {
 		// TODO Auto-generated method stub
-		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
+//		ClientInfoRepository clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
+		if(status.equalsIgnoreCase("all")) {
+			System.out.println("status is all");
+			return clientInfoRepository.getTotalPages();
+		}
 		return clientInfoRepository.getTotalPagesByStatus(status);
+	}
+
+	@Override
+	public List<ClientInfo> getClientInfoByField(String key, String value) {
+		// TODO Auto-generated method stub
+//		clientInfoRepository = databaseService.getDaoClass(ClientInfoRepository.class);
+		System.out.println("quering repo...");
+		return clientInfoRepository.getClientInfoByField(key,value); 
+		
 	}
 }

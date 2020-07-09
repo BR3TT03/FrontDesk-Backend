@@ -31,7 +31,7 @@ public interface ClientInfoRepository {
 	@RegisterBeanMapper(ClientInfo.class)
 	public List<ClientInfo> getClientInfoASC(@Bind int page);	
 	
-	@SqlQuery("SELECT * FROM ClientInfo WHERE status = :status AND name LIKE '%' ORDER BY createdAt DESC LIMIT 10 OFFSET :page")
+	@SqlQuery("SELECT * FROM ClientInfo WHERE status = :status AND name LIKE CONCAT(:nameFilter,'%') ORDER BY createdAt DESC LIMIT 10 OFFSET :page")
 	@RegisterBeanMapper(ClientInfo.class)
 	public List<ClientInfo> getClientInfoByStatusDESC(@Bind int page,String status,String orderBy,String nameFilter);
 	
@@ -50,20 +50,15 @@ public interface ClientInfoRepository {
 	@SqlQuery("SELECT COUNT(*) FROM ClientInfo")
 	public int getTotalPages();
 
-	/**
-	 * @param clientInfo
-	 * @param id
-	 * @return boolean
-	 */
 	@SqlUpdate("UPDATE ClientInfo SET name =:name,academic=:academic,status=:status,email=:email,phone=:phone,weight=:weight,address=:address,"
 			+ "age=:age,date=:date,remark=:remark,height=:height,gender=:gender,maritalStatus=:maritalStatus,createdAt=CURRENT_DATE WHERE id=:id")
 	@RegisterBeanMapper(ClientInfo.class)
 	public boolean updateClientInfo(@BindBean ClientInfo clientInfo, @Bind int id);
 
-	/**
-	 * @param status
-	 * @return
-	 */
 	@SqlQuery("SELECT COUNT(*) FROM ClientInfo where status=:status")
 	public int getTotalPagesByStatus(@Bind String status);
+
+	@SqlQuery("SELECT * FROM ClientInfo WHERE :key=:value")
+	@RegisterBeanMapper(ClientInfo.class)
+	public List<ClientInfo> getClientInfoByField(String key, String value);
 }
