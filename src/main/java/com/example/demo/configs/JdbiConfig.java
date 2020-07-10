@@ -24,17 +24,17 @@ public class JdbiConfig {
 		HikariConfig hikariConfig = new HikariConfig();
 		
 		//RemoteMySql
-//		 hikariConfig.setUsername("2JexZAJXeG");
-//		 hikariConfig.setPassword("hdojRSzwXD"); 
-//		 hikariConfig.setJdbcUrl("jdbc:mysql://remotemysql.com:3306/2JexZAJXeG?autoReconnect=true&serverTimezone=UTC");
-//		 return new HikariDataSource(hikariConfig); 
+		 hikariConfig.setUsername("2JexZAJXeG");
+		 hikariConfig.setPassword("hdojRSzwXD"); 
+		 hikariConfig.setJdbcUrl("jdbc:mysql://remotemysql.com:3306/2JexZAJXeG?autoReconnect=true&serverTimezone=UTC");
+		 return new HikariDataSource(hikariConfig); 
 		
 		//LocalHost
-		hikariConfig.setUsername("root");
-		hikariConfig.setPassword("");
-		hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/FrontDesk?autoReconnect=true&serverTimezone=UTC");
-		hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		return new HikariDataSource(hikariConfig);
+//		hikariConfig.setUsername("root");
+//		hikariConfig.setPassword("");
+//		hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/FrontDesk?autoReconnect=true&serverTimezone=UTC");
+//		hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
+//		return new HikariDataSource(hikariConfig);
 	}
 	
 	
