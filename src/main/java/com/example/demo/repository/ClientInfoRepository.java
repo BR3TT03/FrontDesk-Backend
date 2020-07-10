@@ -33,13 +33,13 @@ public interface ClientInfoRepository {
 	public ClientInfo getClientInfoById(@Bind int id);
 
 	@SqlQuery("SELECT * FROM ClientInfo WHERE (status LIKE CONCAT(:status,'%') AND createdAt >= CURRENT_DATE - :Days AND "
-			+ "name LIKE CONCAT(:nameFilter,'%')) ORDER BY createdAt DESC LIMIT 10 OFFSET :page")
+			+ "name LIKE CONCAT('%',:nameFilter,'%')) ORDER BY createdAt DESC LIMIT 10 OFFSET :page")
 	@RegisterBeanMapper(ClientInfo.class)
 	public List<ClientInfo> getClientInfoByStatusDESC(@Bind int page, String status, String orderBy, String nameFilter,
 			int Days);
 
 	@SqlQuery("SELECT * FROM ClientInfo WHERE (status LIKE CONCAT(:status,'%') AND createdAt >= CURRENT_DATE - :Days AND "
-			+ "name LIKE CONCAT(:nameFilter,'%')) ORDER BY createdAt ASC LIMIT 10 OFFSET :page")
+			+ "name LIKE CONCAT('%',:nameFilter,'%')) ORDER BY createdAt ASC LIMIT 10 OFFSET :page")
 	@RegisterBeanMapper(ClientInfo.class)
 	public List<ClientInfo> getClientInfoByStatusASC(@Bind int page, String status, String orderBy, String nameFilter,
 			int Days);
