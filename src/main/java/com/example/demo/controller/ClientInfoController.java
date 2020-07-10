@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import java.lang.reflect.Field;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,25 +33,6 @@ public class ClientInfoController {
 		return "Welcome to FrontDesk Api";
 	}
 
-	/*
-	 * @GetMapping("/clientInfo/{page}") public List<ClientInfo>
-	 * getClientInfo(@PathVariable int page){ // int NoOfPages =
-	 * clientInfoService.getClientInfo().size(); return
-	 * clientInfoService.getClientInfo((page-1)*10); }
-	 */
-
-//	@GetMapping("clientInfo/totalPages")
-//	public int getTotalPages() {
-//		int totalPage = clientInfoService.getTotalPages();
-//		if (totalPage % 10 != 0) {
-//			totalPage = (int) (totalPage / 10) + 1;
-//			return totalPage;
-//		}
-//
-//		return (totalPage / 10);
-//
-//	}
-
 	@GetMapping("/totalPages")
 	public int getTotalPagesByStatus(@RequestParam(name = "status") String status) {
 		int totalPage = 1;
@@ -63,24 +46,17 @@ public class ClientInfoController {
 
 	}
 
-//	@GetMapping("/clientInfoByField")
-//	public List<ClientInfo> getClientInfoByField(@RequestParam Map<Object,Object> field){
-//		String[] columnName= {"null"};	
-//		String[] value= {"null"};
-//		field.forEach((k, v) -> {
-//			columnName[0]=(String)k;
-//			value[0] = (String)v;
-//		});
-//		
-//		return clientInfoService.getClientInfoByField(columnName[0],value[0]);
-//	}
-
 	@GetMapping("/clientInfo")
-	public List<ClientInfo> getClientInfoByStatus(@RequestParam(name = "status", required = false) String status,
+	public List<ClientInfo> getClientInfoByStatus(
+			@RequestParam(name = "status", required = false, defaultValue = "") String status,
 			@RequestParam(name = "order", required = false, defaultValue = "DESC") String order,
 			@RequestParam(name = "page") int page,
-			@RequestParam(name = "nameFilter", required = false) String nameFilter) {
-		return clientInfoService.getClientInfoByStatus((page - 1) * 10, status, order, nameFilter);
+			@RequestParam(name = "nameFilter", required = false, defaultValue="") String nameFilter,
+			@RequestParam(name="days",required=false,defaultValue="0") String days
+			) 
+			
+	{
+		return clientInfoService.getClientInfoByStatus((page - 1) * 10, status, order, nameFilter, days);
 	}
 
 	@PostMapping("/insertClientInfo")
@@ -109,14 +85,10 @@ public class ClientInfoController {
 			ClientInfo existingData = clientInfoService.getClientInfoById(id);
 			System.out.println("After null pointer exception");
 			clientInfo.forEach((k, v) -> {
-				// use reflection to get field k on object and set it to value v
-				// Change Claim.class to whatver your object is: Object.class
 				Field field = ReflectionUtils.findField(ClientInfo.class, (String) k);
-				System.out.println("#######Field: " + field.getName() + "############# " + k);// find field in the
-																								// object class
+				System.out.println("#######Field: " + field.getName() + "############# " + k);
 				field.setAccessible(true);
 				ReflectionUtils.setField(field, existingData, v);
-				// set given field for defined object to value V
 			});
 
 			clientInfoService.updateClientInfo(existingData, id);
@@ -126,4 +98,36 @@ public class ClientInfoController {
 		return "Client with clientId " + id + " does not exist";
 
 	}
+
+	/*
+	 * @GetMapping("/clientInfo/{page}") public List<ClientInfo>
+	 * getClientInfo(@PathVariable int page){ // int NoOfPages =
+	 * clientInfoService.getClientInfo().size(); return
+	 * clientInfoService.getClientInfo((page-1)*10); }
+	 */
+
+//	@GetMapping("clientInfo/totalPages")
+//	public int getTotalPages() {
+//		int totalPage = clientInfoService.getTotalPages();
+//		if (totalPage % 10 != 0) {
+//			totalPage = (int) (totalPage / 10) + 1;
+//			return totalPage;
+//		}
+//
+//		return (totalPage / 10);
+//
+//	}
+
+//	@GetMapping("/clientInfoByField")
+//	public List<ClientInfo> getClientInfoByField(@RequestParam Map<Object,Object> field){
+//		String[] columnName= {"null"};	
+//		String[] value= {"null"};
+//		field.forEach((k, v) -> {
+//			columnName[0]=(String)k;
+//			value[0] = (String)v;
+//		});
+//		
+//		return clientInfoService.getClientInfoByField(columnName[0],value[0]);
+//	}
+
 }
