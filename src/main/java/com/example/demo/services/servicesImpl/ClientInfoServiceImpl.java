@@ -38,7 +38,7 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 	@Override
 	public List<ClientInfo> getClientInfoByStatus(int page, String status, String order, String nameFilter,
 			String days) {
-
+		if(days.equalsIgnoreCase("all")) days = "0";
 		int Days = Integer.parseInt(days);
 //		LocalDate endDate;
 //		LocalDate startDate = LocalDate.now();
@@ -129,11 +129,10 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 
 	@Override
 	public List<ClientInfo> getClientInfoByField(String key, String value) {
-		System.out.println("quering repo...");
 		return clientInfoRepository.getClientInfoByField(key, value);
 
 	}
-	
+
 	public boolean deleteFromTrash(int id) {
 		return clientInfoRepository.deleteFromTrash(id);
 	}
