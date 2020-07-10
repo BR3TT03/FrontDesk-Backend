@@ -38,7 +38,7 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 	@Override
 	public List<ClientInfo> getClientInfoByStatus(int page, String status, String order, String nameFilter,
 			String days) {
-		if(days.equalsIgnoreCase("all")) days = "0";
+		if(days.equalsIgnoreCase("all")) days = "-1";
 		int Days = Integer.parseInt(days);
 //		LocalDate endDate;
 //		LocalDate startDate = LocalDate.now();
