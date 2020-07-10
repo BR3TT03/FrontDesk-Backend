@@ -99,6 +99,7 @@ public class ClientInfoController {
 
 	}
 
+	
 	/*
 	 * @GetMapping("/clientInfo/{page}") public List<ClientInfo>
 	 * getClientInfo(@PathVariable int page){ // int NoOfPages =

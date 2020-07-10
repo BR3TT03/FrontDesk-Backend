@@ -13,27 +13,33 @@ import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 
 public interface ClientInfoService {
 //	public List<ClientInfo> getClientInfo(int page);
-	public List<ClientInfo> getClientInfoByStatus(int page,String status,String order,String nameFilter, String days);
+	public List<ClientInfo> getClientInfoByStatus(int page, String status, String order, String nameFilter,
+			String days);
+
 	public void insertClientInfo(ClientInfo clientInfo);
+
 //	public int getTotalPages();
 	public boolean deleteClientInfoById(int id);
+
+	public boolean updateClientInfo(ClientInfo existingData, int id);
+
+	public int existsById(int id);
+
+	public ClientInfo getClientInfoById(int id);
+
+	public int getTotalPagesByStatus(String status);
+
+	public List<ClientInfo> getClientInfoByField(String key, String value);
+	public boolean deleteFromTrash(int id);
+
 	/**
-	 * @param existingData
 	 * @param id
 	 * @return
 	 */
-	public boolean updateClientInfo(ClientInfo existingData, int id);
-	public int existsById(int id);
-	public ClientInfo getClientInfoById(int id);
+	public boolean restoreFomTrash(int id);
+
 	/**
-	 * @param status
 	 * @return
 	 */
-	public int getTotalPagesByStatus(String status);
-	/**
-	 * @param columnName
-	 * @param value
-	 * @return
-	 */
-	public List<ClientInfo> getClientInfoByField(String key, String value);
+	public List<ClientInfo> getClientInfoFromTrash();
 }

@@ -66,4 +66,17 @@ public interface ClientInfoRepository {
 	@SqlQuery("SELECT * FROM ClientInfo WHERE :key=:value")
 	@RegisterBeanMapper(ClientInfo.class)
 	public List<ClientInfo> getClientInfoByField(String key, String value);
+	
+	@SqlUpdate("INSERT INTO Trash SELECT * FROM ClientInfo WHERE id = :id")
+	public void moveToTrash(@Bind int id);
+	
+	@SqlUpdate("DELETE FROM Trash WHERE id = :id")
+	public boolean deleteFromTrash(@Bind int id);
+	
+	@SqlUpdate("INSERT INTO ClientInfo SELECT * FROM Trash where id = :id ")
+	public void restoreFromTrash(@Bind int id);
+
+	@SqlQuery("SELECT * FROM Trash")
+	@RegisterBeanMapper(ClientInfo.class)
+	public List<ClientInfo> getClientInfoFromTrash();
 }

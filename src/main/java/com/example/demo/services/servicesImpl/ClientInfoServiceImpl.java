@@ -50,8 +50,7 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 		}
 		if (order.equalsIgnoreCase("asc")) {
 			return clientInfoRepository.getClientInfoByStatusASC(page, status, order, nameFilter, Days);
-		} 
-		else if (order.equalsIgnoreCase("desc")) {
+		} else if (order.equalsIgnoreCase("desc")) {
 			return clientInfoRepository.getClientInfoByStatusDESC(page, status, order, nameFilter, Days);
 
 		}
@@ -83,7 +82,10 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 
 	@Override
 	public boolean deleteClientInfoById(int id) {
-		return clientInfoRepository.deleteClientInfoById(id);
+		boolean status;
+		clientInfoRepository.moveToTrash(id);
+		status = clientInfoRepository.deleteClientInfoById(id);
+		return status;
 
 	}
 
@@ -130,5 +132,21 @@ public class ClientInfoServiceImpl implements ClientInfoService {
 		System.out.println("quering repo...");
 		return clientInfoRepository.getClientInfoByField(key, value);
 
+	}
+	
+	public boolean deleteFromTrash(int id) {
+		return clientInfoRepository.deleteFromTrash(id);
+	}
+
+	@Override
+	public boolean restoreFomTrash(int id) {
+		clientInfoRepository.restoreFromTrash(id);
+		clientInfoRepository.deleteFromTrash(id);
+		return true;
+	}
+
+	@Override
+	public List<ClientInfo> getClientInfoFromTrash() {
+		return clientInfoRepository.getClientInfoFromTrash();
 	}
 }
